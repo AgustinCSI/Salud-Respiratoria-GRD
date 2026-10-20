@@ -1,0 +1,22 @@
+:root {
+  font-family: 'Segoe UI', Inter, system-ui, -apple-system, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --navy: #153B50;
+  --blue: #2876A8;
+  --teal: #21A69A;
+  --amber: #E6A44A;
+  --background: #F4F8FB;
+  --panel: #ffffff;
+  --ink: #153B50;
+  --muted: #596F7C;
+  --border: #DEE8EE;
+  --blue-soft: #EAF3F9;
+  --teal-soft: #E7F5F2;
+  --amber-soft: #FFF7E9;
+  --radius: 14px;
+  --space-block: 28px;
+  color: var(--ink);
+  background: var(--background);
+}

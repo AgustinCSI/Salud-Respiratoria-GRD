@@ -1,0 +1,71 @@
+/** Contratos provisionales: requieren validación con el equipo de datos. */
+export type Sex = 'female' | 'male' | 'unknown';
+export type AgeGroup = 'all' | 'under18' | '18to64' | '65plus' | 'unknown';
+export interface Filters {
+  startDate: string;
+  endDate: string;
+  region: string;
+  age: AgeGroup;
+  sex: 'all' | Sex;
+  diagnosis: string;
+}
+export interface Option { id: string; label: string }
+export interface FilterOptions {
+  minDate: string;
+  maxDate: string;
+  years: number[];
+  regions: Option[];
+  ages: Option[];
+  sexes: Option[];
+  diagnoses: Option[];
+}
+export interface Measure {
+  value: number | null;
+  status: 'available' | 'unavailable';
+  reason?: 'zero_denominator' | 'no_events' | 'missing_values';
+  unit: 'events' | 'percent' | 'days';
+  validCount: number;
+}
+export interface TimePoint {
+  period: string;
+  value: number | null;
+  status: 'available' | 'unavailable';
+  partial: boolean;
+}
+export interface CategoryValue {
+  id: string;
+  label: string;
+  value: number;
+  percent: number | null;
+}
+export interface SourceMetadata {
+  mode: 'simulated' | 'real';
+  source: string;
+  version: string;
+  updatedAt: string;
+  minDate: string;
+  maxDate: string;
+  territorialBasis: 'residencia_simulada' | 'residencia' | 'atencion';
+  temporalBasis: 'discharge' | 'admission';
+  definition: string;
+  appliedFilters: Filters;
+  respiratoryTotal: number;
+  universeTotal: number;
+  missingStay: number;
+  unknownAge: number;
+  unknownSex: number;
+  warnings: string[];
+}
+export interface Overview {
+  status: 'ready' | 'empty';
+  indicators: { hospitalizations: Measure; proportion: Measure; medianStay: Measure };
+  monthly: TimePoint[];
+  diagnoses: CategoryValue[];
+  territories: CategoryValue[];
+  demographics: { age: CategoryValue[]; sex: CategoryValue[] };
+  meta: SourceMetadata;
+}
+export interface DashboardService {
+  getFilterOptions(signal?: AbortSignal): Promise<FilterOptions>;
+  getOverview(filters: Filters, signal?: AbortSignal): Promise<Overview>;
+}

@@ -1,0 +1,59 @@
+# Frontend de Surviral
+
+Primera pantalla funcional del explorador de hospitalizaciones respiratorias. Toda la información es ficticia y se calcula desde una misma fuente determinista. No se leen los archivos GRD del repositorio.
+
+## Ejecutar en tu computador
+
+Requisito: Node.js 22.12 o posterior; para ejecutar las pruebas de TypeScript sin herramientas adicionales se recomienda Node.js 24.
+
+Abre una terminal en `frontend/`:
+
+```sh
+npm install # Solo la primera vez o si cambian las dependencias
+npm run dev
+```
+
+- **Abrir:** http://127.0.0.1:5173/. Mantén la terminal abierta.
+- **Apagar:** presiona `Ctrl + C` en esa terminal. Cerrar la pestaña no detiene el servidor.
+- **Puerto 5173 ocupado:** ya hay un servidor activo. Usa el enlace o detén la instancia anterior antes de iniciar otra.
+
+No se necesita backend para los datos simulados.
+
+```sh
+npm test
+npm run build
+npm run preview
+```
+
+La compilación crea `dist/`; para compartirla se debe servir esa carpeta mediante un servidor estático. No abrir `index.html` con doble clic: es una aplicación con módulos. El servidor de desarrollo solo escucha en este equipo por defecto.
+
+## Alcance de esta entrega
+
+- Panorama general: tres indicadores, serie mensual y ranking diagnóstico.
+- Fechas inclusivas 2019–2024, región, edad, sexo y diagnóstico; selecciones visibles, limpieza y cancelación de consultas antiguas.
+- Datos, gráficos y medianas calculados desde eventos ficticios individuales. Categorías desconocidas explícitas.
+- Tabla accesible y descarga CSV de la serie, identificada como simulada.
+- Vista de metodología y fuentes.
+- Las otras cuatro vistas muestran su alcance previsto; todavía no implementan mapa, comparaciones interanuales, perfil ampliado ni integración ambiental/vacunal.
+
+Fecha de referencia provisional: egreso. Geografía: residencia simulada. El filtro de diagnóstico solo modifica el numerador respiratorio del porcentaje. Estas definiciones deben validarse antes de conectar datos reales.
+
+## Organización
+
+- `src/app`: navegación y filtros compartidos.
+- `src/screens`: composición de las pantallas.
+- `src/components`: filtros, paneles, indicadores y estados reutilizables.
+- `src/charts`: presentación de series y distribuciones.
+- `src/services`: interfaz de acceso; punto único de sustitución en `index.ts`.
+- `src/mocks`: eventos ficticios y agregaciones exclusivas de la demostración.
+- `src/types`: contratos provisionales, valores ausentes y metadatos.
+- `src/styles`: paleta y diseño adaptable.
+- `src/utils`: presentación de fechas, números y descarga CSV.
+- `tests`: coherencia de universos, filtros, ausentes y cancelación.
+- `docs`: integración y catálogo de gráficos.
+
+Todo el trabajo de frontend se mantiene dentro de esta carpeta. La limpieza real, clasificación diagnóstica y análisis estadístico definitivo pertenecen al equipo de datos y backend.
+
+## Dependencias
+
+React y TypeScript para componentes y contratos; Vite para desarrollo/compilación; Recharts para el gráfico mensual; Lucide para iconos. CSS propio, sin framework visual, sin servidor de datos simulado y sin biblioteca global de estado.
