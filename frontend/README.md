@@ -34,7 +34,9 @@ La compilación crea `dist/`; para compartirla se debe servir esa carpeta median
 - Datos, gráficos y medianas calculados desde eventos ficticios individuales. Categorías desconocidas explícitas.
 - Tabla accesible y descarga CSV de la serie, identificada como simulada.
 - Vista de metodología y fuentes.
-- Las otras cuatro vistas muestran su alcance previsto; todavía no implementan mapa, comparaciones interanuales, perfil ampliado ni integración ambiental/vacunal.
+- Mapa interactivo de las 16 regiones en panorama y territorio, con islas en recuadros; geometría referencial sin territorio antártico.
+- Territorio: comparación, tabla y mapa de calor región × mes. Evolución: comparación mensual entre años y serie cronológica. Perfil: edad, sexo y diagnósticos.
+- Ambiente y vacunación: paneles de disponibilidad y requisitos de integración; todavía sin fuentes conectadas.
 
 Fecha de referencia provisional: egreso. Geografía: residencia simulada. El filtro de diagnóstico solo modifica el numerador respiratorio del porcentaje. Estas definiciones deben validarse antes de conectar datos reales.
 

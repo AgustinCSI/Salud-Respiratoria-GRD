@@ -55,6 +55,7 @@ export function summarize(filters: Filters, source: readonly SimulatedEvent[] = 
       medianStay: measure(median, 'days', stays.length, median === null ? selected.length ? 'missing_values' : 'no_events' : undefined),
     },
     monthly,
+    regionalMonthly: filterOptions.regions.filter(r => filters.region === 'all' || r.id === filters.region).map(r => ({ ...r, points: monthly.map(p => ({ ...p, value: selected.filter(e => e.region === r.id && e.dischargeDate.startsWith(p.period)).length })) })),
     diagnoses: distribution(filterOptions.diagnoses.filter(o => filters.diagnosis === 'all' || o.id === filters.diagnosis), (e, id) => e.diagnosis === id).sort((a, b) => b.value - a.value || a.label.localeCompare(b.label, 'es')),
     territories: distribution(filterOptions.regions.filter(o => filters.region === 'all' || o.id === filters.region), (e, id) => e.region === id),
     demographics: {

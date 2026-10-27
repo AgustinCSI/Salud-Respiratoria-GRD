@@ -13,6 +13,9 @@ test('Las particiones reconcilian con el indicador en los seis años y dieciséi
       assert.equal(values.reduce((sum, point) => sum + (point.value ?? 0), 0), total);
     }
     assert.ok(data.meta.respiratoryTotal <= data.meta.universeTotal);
+    assert.equal(data.regionalMonthly.reduce((sum,r) => sum + r.points.reduce((s,p) => s+(p.value??0),0),0),total);
+    for (const point of data.monthly) assert.equal(data.regionalMonthly.reduce((sum,r)=>sum+(r.points.find(p=>p.period===point.period)?.value??0),0),point.value);
+    for (const region of data.territories) assert.equal(data.regionalMonthly.find(r=>r.id===region.id)?.points.reduce((sum,p)=>sum+(p.value??0),0),region.value);
     assert.equal(data.indicators.proportion.value, 100 * data.meta.respiratoryTotal / data.meta.universeTotal);
   }
 });

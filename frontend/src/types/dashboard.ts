@@ -62,6 +62,7 @@ export interface Overview {
   monthly: TimePoint[];
   diagnoses: CategoryValue[];
   territories: CategoryValue[];
+  regionalMonthly: { id: string; label: string; points: TimePoint[] }[];
   demographics: { age: CategoryValue[]; sex: CategoryValue[] };
   meta: SourceMetadata;
 }

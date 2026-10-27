@@ -27,6 +27,7 @@ Una respuesta conjunta evita mezclar versiones de indicadores y gráficos. Devue
 - `monthly`: meses ISO YYYY-MM en orden, valor y bandera de período parcial.
 - `diagnoses`: grupos principales excluyentes, incluidos otros/no especificados. Deben sumar el conteo seleccionado.
 - `territories`: código, nombre, cantidad y proporción sobre los eventos seleccionados. Su suma reconcilia con el total.
+- `regionalMonthly`: una fila `{id, label, points: TimePoint[]}` por región seleccionada. Sus filas suman `territories` y sus columnas suman `monthly`; el frontend usa esta matriz en el mapa de calor.
 - `demographics`: edad y sexo con desconocidos explícitos. Cada distribución reconcilia con el total.
 - `meta`: modo simulado/real, fuente y versión, actualización, cobertura, definición, semántica temporal y territorial, filtros aplicados y diagnósticos de calidad.
 
@@ -44,6 +45,6 @@ El backend puede organizar cálculos en módulos Python por dominio: indicadores
 
 ## Geografía y nuevas fuentes
 
-La próxima fase territorial necesitará geometrías verificables de Chile y una clave de unión estable con los agregados. No se dibuja un mapa aproximado. Seleccionar una región debe actualizar filtros y paneles; la tabla y las barras ofrecerán alternativas accesibles al mapa. Un futuro mapa de calor región × mes usará los mismos agregados para evitar divergencias.
+La demostración local incorpora geometría referencial con 16 regiones unidas por códigos de dos caracteres. Fuente, transformaciones, alcance y validación pendiente de licencia se documentan en `MAPA.md`. Seleccionar una región actualiza filtros y paneles; la lista y tabla ofrecen alternativas accesibles al mapa. La matriz región × mes usa el mismo universo y reconcilia con los agregados existentes. Antes de conectar el backend, validar si la región representa residencia o atención y la cobertura de la geografía elegida.
 
 Vacunación: vacuna, campaña, dosis/pauta, población objetivo, numerador y denominador de cobertura, fechas y geografía compatibles. Ambiente: contaminante/variable, unidad, estación, agregación territorial, período y cobertura de medición. Fuentes oficiales o institucionales verificadas. No comparar dosis con cobertura ni hospitalizaciones con incidencia. No inferir causalidad de correlaciones o asociaciones agregadas.
