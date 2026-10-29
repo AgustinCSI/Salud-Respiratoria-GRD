@@ -69,4 +69,5 @@ export interface Overview {
 export interface DashboardService {
   getFilterOptions(signal?: AbortSignal): Promise<FilterOptions>;
   getOverview(filters: Filters, signal?: AbortSignal): Promise<Overview>;
+  getLogisticPreview(filters: Filters, signal?: AbortSignal): Promise<import('./logistic.ts').LogisticPreview>;
 }

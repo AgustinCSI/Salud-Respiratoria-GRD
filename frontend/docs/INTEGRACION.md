@@ -35,6 +35,14 @@ Las opciones de filtros deben representar categorías realmente disponibles y co
 
 ## Ausencia y error
 
+### Actividad logística provisional
+
+`getLogisticPreview(filters, signal)` devuelve `LogisticPreview` de `src/types/logistic.ts`. El adaptador simulado ajusta un modelo didáctico con eventos ficticios en `src/mocks/logistic.ts`; la pantalla no accede directamente a ellos. El backend futuro entregará probabilidades y metadatos de un modelo revisado, sin entrenar dentro de un componente visual. No hay endpoint aprobado todavía.
+
+Incluye estado ready/unavailable, razón de insuficiencia, corte de datos, exclusión de mes parcial, umbral de conteo, períodos de entrenamiento/evaluación, probabilidades de evaluación, clases y conteos observados, coeficientes, Brier y referencia, y probabilidad del mes siguiente. `mode` actualmente solo admite simulated; cambiar el contrato y la rotulación cuando exista integración real, nunca cambiar solo la etiqueta.
+
+La fecha inicial limita las gráficas históricas pero no el entrenamiento: usa historia desde enero de 2019 hasta el último mes completo anterior o igual a la fecha final. Todos los filtros de población sí aplican al modelo. La evaluación es secuencial de un paso, con coeficientes congelados; no es un horizonte simultáneo de 12 meses. Condiciones de categorías, ajuste y limitaciones se documentan en `ACTIVIDAD_REGRESION_LOGISTICA.txt`. La idea de pronosticar cantidades queda separada en `IDEA_FUTURA_PRONOSTICO.txt`.
+
 Medidas: `value: 0` con status available es un cero válido; `value: null` con status unavailable informa ausencia/no calculabilidad y su motivo. Denominador cero produce porcentaje nulo. Un mes sin cobertura debe devolver nulo/unavailable, no cero; la línea se interrumpe. La categoría desconocida no representa ausencia de eventos.
 
 La UI tiene carga, error con reintento, consulta cancelada (silenciosa) y selección sin resultados. Un error del backend no debe mostrarse como lista vacía. Las respuestas tardías de una consulta previa se descartan. En integración real, evaluar una instantánea o versión de datos común al resumen completo.
